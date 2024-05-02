@@ -5,8 +5,10 @@ enum AppMode {
 }
 
 class AppSettings {
-  static const String appName = String.fromEnvironment("app_name");
   static final AppMode appMode = AppMode.values.firstWhere(
     (element) => element.name == const String.fromEnvironment("app_mode"),
   );
+
+  static const String apiKey = String.fromEnvironment("api_key");
+  static const String appName = String.fromEnvironment("app_name");
 }

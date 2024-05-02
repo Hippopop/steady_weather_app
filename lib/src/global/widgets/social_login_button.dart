@@ -11,6 +11,7 @@ class SocialButton extends StatelessWidget {
     required this.iconLink,
     required this.onTap,
   });
+
   final String text;
   final String iconLink;
   final VoidCallback onTap;

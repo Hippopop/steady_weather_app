@@ -36,42 +36,44 @@ class HorizontalItemSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final singleItemWidth = constraints.maxWidth / (itemList.length);
-      final selectedIndex =
-          itemList.indexWhere((element) => element.key == currentSelectedKey);
-      return Stack(
-        clipBehavior: Clip.hardEdge,
-        children: [
-          AnimatedPositioned(
-            left: singleItemWidth * selectedIndex,
-            duration: const Duration(milliseconds: 320),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                color: indicatorColor ?? Colors.blue,
-              ),
-              child: SizedBox(
-                height: constraints.maxHeight,
-                width: singleItemWidth,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final singleItemWidth = constraints.maxWidth / (itemList.length);
+        final selectedIndex =
+            itemList.indexWhere((element) => element.key == currentSelectedKey);
+        return Stack(
+          clipBehavior: Clip.hardEdge,
+          children: [
+            AnimatedPositioned(
+              left: singleItemWidth * selectedIndex,
+              duration: const Duration(milliseconds: 320),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  color: indicatorColor ?? Colors.blue,
+                ),
+                child: SizedBox(
+                  height: constraints.maxHeight,
+                  width: singleItemWidth,
+                ),
               ),
             ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: itemList
-                .map((e) => SelectedItemWidget(
-                      item: e,
-                      isSelected: currentSelectedKey == e.key,
-                      selectedColor: selectedColor ?? Colors.white,
-                      unselectedColor: unselectedColor ?? Colors.black,
-                      onTap: onItemTap,
-                    ))
-                .toList(),
-          ),
-        ],
-      );
-    });
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: itemList
+                  .map((e) => SelectedItemWidget(
+                        item: e,
+                        onTap: onItemTap,
+                        isSelected: currentSelectedKey == e.key,
+                        selectedColor: selectedColor ?? Colors.white,
+                        unselectedColor: unselectedColor ?? Colors.black,
+                      ))
+                  .toList(),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 
