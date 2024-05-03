@@ -16,7 +16,7 @@ class RequestHandler {
       baseUrl: API.baseUrl,
       persistentConnection: true,
       connectTimeout: const Duration(seconds: 15),
-      // queryParameters: {'key': AppSettings.apiKey},
+      queryParameters: {'key': AppSettings.apiKey},
       validateStatus: (status) => true,
       headers: {
         'connection': 'keep-alive',

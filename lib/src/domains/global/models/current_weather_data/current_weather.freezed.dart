@@ -424,9 +424,8 @@ class __$$CurrentWeatherImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CurrentWeatherImpl
-    with DiagnosticableTreeMixin
-    implements _CurrentWeather {
+class _$CurrentWeatherImpl extends _CurrentWeather
+    with DiagnosticableTreeMixin {
   const _$CurrentWeatherImpl(
       {@JsonKey(name: 'last_updated_epoch') this.lastUpdatedEpoch,
       @JsonKey(name: 'last_updated') this.lastUpdated,
@@ -450,7 +449,8 @@ class _$CurrentWeatherImpl
       @JsonKey(name: 'vis_miles') this.visMiles,
       @JsonKey(name: 'uv') this.uv,
       @JsonKey(name: 'gust_mph') this.gustMph,
-      @JsonKey(name: 'gust_kph') this.gustKph});
+      @JsonKey(name: 'gust_kph') this.gustKph})
+      : super._();
 
   factory _$CurrentWeatherImpl.fromJson(Map<String, dynamic> json) =>
       _$$CurrentWeatherImplFromJson(json);
@@ -646,7 +646,7 @@ class _$CurrentWeatherImpl
   }
 }
 
-abstract class _CurrentWeather implements CurrentWeather {
+abstract class _CurrentWeather extends CurrentWeather {
   const factory _CurrentWeather(
       {@JsonKey(name: 'last_updated_epoch') final int? lastUpdatedEpoch,
       @JsonKey(name: 'last_updated') final String? lastUpdated,
@@ -671,6 +671,7 @@ abstract class _CurrentWeather implements CurrentWeather {
       @JsonKey(name: 'uv') final int? uv,
       @JsonKey(name: 'gust_mph') final int? gustMph,
       @JsonKey(name: 'gust_kph') final double? gustKph}) = _$CurrentWeatherImpl;
+  const _CurrentWeather._() : super._();
 
   factory _CurrentWeather.fromJson(Map<String, dynamic> json) =
       _$CurrentWeatherImpl.fromJson;
@@ -862,11 +863,12 @@ class __$$ConditionImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ConditionImpl with DiagnosticableTreeMixin implements _Condition {
+class _$ConditionImpl extends _Condition with DiagnosticableTreeMixin {
   const _$ConditionImpl(
       {@JsonKey(name: 'text') this.text,
       @JsonKey(name: 'icon') this.icon,
-      @JsonKey(name: 'code') this.code});
+      @JsonKey(name: 'code') this.code})
+      : super._();
 
   factory _$ConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConditionImplFromJson(json);
@@ -924,11 +926,12 @@ class _$ConditionImpl with DiagnosticableTreeMixin implements _Condition {
   }
 }
 
-abstract class _Condition implements Condition {
+abstract class _Condition extends Condition {
   const factory _Condition(
       {@JsonKey(name: 'text') final String? text,
       @JsonKey(name: 'icon') final String? icon,
       @JsonKey(name: 'code') final int? code}) = _$ConditionImpl;
+  const _Condition._() : super._();
 
   factory _Condition.fromJson(Map<String, dynamic> json) =
       _$ConditionImpl.fromJson;

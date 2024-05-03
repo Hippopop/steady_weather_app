@@ -32,6 +32,13 @@ class CurrentWeather with _$CurrentWeather {
     @JsonKey(name: 'gust_kph') double? gustKph,
   }) = _CurrentWeather;
 
+  const CurrentWeather._();
+
+  DateTime? get lastUpdate {
+    if (lastUpdatedEpoch == null) return null;
+    return DateTime.fromMillisecondsSinceEpoch(lastUpdatedEpoch! * 1000);
+  }
+
   factory CurrentWeather.fromJson(Map<String, Object?> json) =>
       _$CurrentWeatherFromJson(json);
 }
@@ -43,6 +50,13 @@ class Condition with _$Condition {
     @JsonKey(name: 'icon') String? icon,
     @JsonKey(name: 'code') int? code,
   }) = _Condition;
+
+  const Condition._();
+
+  String? get iconPath {
+    if (icon == null) return icon;
+    return "https:$icon";
+  }
 
   factory Condition.fromJson(Map<String, Object?> json) =>
       _$ConditionFromJson(json);

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:steady_weather_app/src/domains/global/models/current_weather_data/current_weather_data.dart';
@@ -7,18 +8,24 @@ import 'package:steady_weather_app/src/domains/server/weather_repository/weather
 import 'package:steady_weather_app/src/services/connection/connection_state_provider.dart';
 import 'package:steady_weather_app/src/services/location/location_provider.dart';
 
+final currentWeatherStateProvider =
+    AsyncNotifierProvider<CurrentWeatherStateNotifier, CurrentWeatherData?>(
+  CurrentWeatherStateNotifier.new,
+);
+
 class CurrentWeatherStateNotifier extends AsyncNotifier<CurrentWeatherData?> {
   late final _serverRepo = ref.read(serverWeatherRepoProvider);
   late final _localStorageRepo = ref.read(localCurrentWeatherProvider);
 
   @override
   FutureOr<CurrentWeatherData?> build() async {
-    final locationStream = await ref.watch(locationProvider.future);
+    final locationStream = await ref.read(locationProvider.future);
     final connectionStatus = await ref.watch(isConnectedProvider.future);
     if (connectionStatus) {
       final res = await _serverRepo.getCurrentWeatherData(
           lat: locationStream.lat!, long: locationStream.long!);
       if (res.isSuccess) {
+        log(res.data.toString());
         await _localStorageRepo.storeData(res.data!);
       }
     }

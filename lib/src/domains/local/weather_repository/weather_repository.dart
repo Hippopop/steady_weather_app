@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -21,6 +22,7 @@ class CurrentWeatherDataStorage extends LocalRepo<String, CurrentWeatherData>
   CurrentWeatherData? get data {
     final storedString = myBox.get(key);
     if (storedString == null) return null;
+    log("Returning Data!");
     return CurrentWeatherData.fromJson(json.decode(storedString));
   }
 
