@@ -42,20 +42,16 @@ class ResponseWrapper<R> {
   }) {
     if (print) log(rawResponse.data.toString());
     return switch (rawResponse.data) {
-      {
-        "code": int code,
-        "message": String msg,
-      } =>
-        ResponseWrapper<R>(
-          msg: msg,
+      {'error': Map<String, dynamic> error} => ResponseWrapper<R>(
+          msg: error['message'],
           rawResponse: rawResponse,
           status: rawResponse.statusCode,
-          error: RequestError(code: code, msg: msg),
+          error: RequestError.fromMap(error),
         ),
       _ => ResponseWrapper(
           rawResponse: rawResponse,
+          msg: "Unknown request error!",
           status: rawResponse.statusCode,
-          msg: "Response came back with a unknown data format!",
           data: __purseErrorCatcher(purserFunction, rawResponse.data),
         ),
     };
@@ -73,6 +69,6 @@ class ResponseWrapper<R> {
 
   @override
   String toString() {
-    return 'ResponseWrapper(\nstatus: $status,\n msg: $msg,\n rawData: ${rawResponse.data},\n error: $error,\n)';
+    return 'ResponseWrapper(\nstatus: $status,\n msg: $msg,\n rawData: ${rawResponse.data},\n data: $data,\n error: $error,\n)';
   }
 }

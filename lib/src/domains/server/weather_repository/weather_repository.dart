@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:steady_weather_app/src/domain/server/config/api/api.dart';
-import 'package:steady_weather_app/src/domain/server/config/response_wrapper.dart';
-import 'package:steady_weather_app/src/domain/server/weather_repository/models/current_weather_response/current_weather_response.dart';
+import 'package:steady_weather_app/src/domains/server/config/api/api.dart';
+import 'package:steady_weather_app/src/domains/server/config/response_wrapper.dart';
+import 'package:steady_weather_app/src/domains/global/models/current_weather_data/current_weather_data.dart';
 
 import '../config/server_config.dart';
 
@@ -17,7 +17,7 @@ final class ServerWeatherRepository {
   final RequestHandler requestHandler;
   const ServerWeatherRepository({required this.requestHandler});
 
-  Future<ResponseWrapper<CurrentWeatherResponse>> getCurrentWeatherData({
+  Future<ResponseWrapper<CurrentWeatherData>> getCurrentWeatherData({
     required double lat,
     required double long,
   }) async {
@@ -28,7 +28,7 @@ final class ServerWeatherRepository {
       );
       return ResponseWrapper.fromMap(
         rawResponse: res,
-        purserFunction: (json) => CurrentWeatherResponse.fromJson(json),
+        purserFunction: (json) => CurrentWeatherData.fromJson(json),
       );
     } catch (e, s) {
       log("#GetCurrentWeatherError", error: e, stackTrace: s);

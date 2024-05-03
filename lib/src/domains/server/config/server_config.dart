@@ -2,8 +2,9 @@ import 'dart:developer' show log;
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:steady_weather_app/src/domains/server/config/response_wrapper.dart';
 import 'package:steady_weather_app/src/utilities/scaffold_util.dart';
-import 'package:steady_weather_app/src/domain/server/config/api/api.dart';
+import 'package:steady_weather_app/src/domains/server/config/api/api.dart';
 import 'package:steady_weather_app/src/constants/settings/app_settings.dart';
 
 final requestHandlerProvider =
@@ -15,7 +16,8 @@ class RequestHandler {
       baseUrl: API.baseUrl,
       persistentConnection: true,
       connectTimeout: const Duration(seconds: 15),
-      queryParameters: {'key': AppSettings.apiKey},
+      // queryParameters: {'key': AppSettings.apiKey},
+      validateStatus: (status) => true,
       headers: {
         'connection': 'keep-alive',
         'accept': 'application/json',
@@ -48,10 +50,10 @@ class RequestHandler {
         url: baseUrl ?? mainUrl + url,
         data: params,
         error: error,
-        msg: errorMsg,
         trace: stacktrace,
         res: error.response,
         exceptionType: error.type,
+        msg: error.type.toPrettyDescription(),
         statusCode: error.response?.statusCode,
       );
     } catch (error, stacktrace) {
@@ -87,10 +89,10 @@ class RequestHandler {
         method: "/GET",
         url: baseUrl ?? mainUrl + url,
         error: error,
-        msg: errorMsg,
         trace: stacktrace,
         res: error.response,
         exceptionType: error.type,
+        msg: error.type.toPrettyDescription(),
         statusCode: error.response?.statusCode,
       );
     } catch (error, stacktrace) {
@@ -128,10 +130,10 @@ class RequestHandler {
         url: baseUrl ?? mainUrl + url,
         data: params,
         error: error,
-        msg: errorMsg,
         trace: stacktrace,
         res: error.response,
         exceptionType: error.type,
+        msg: error.type.toPrettyDescription(),
         statusCode: error.response?.statusCode,
       );
     } catch (error, stacktrace) {
@@ -170,10 +172,10 @@ class RequestHandler {
         url: baseUrl ?? mainUrl + url,
         data: params,
         error: error,
-        msg: errorMsg,
         trace: stacktrace,
         res: error.response,
         exceptionType: error.type,
+        msg: error.type.toPrettyDescription(),
         statusCode: error.response?.statusCode,
       );
     } catch (error, stacktrace) {
@@ -257,15 +259,19 @@ class RequestException implements Exception {
     bool checkAuth = true,
     String defaultMessage = "Unknown server error!",
   }) async {
-    try {} catch (e, s) {
-      log("#HandleError", error: e, stackTrace: s);
-      if (res?.data != null &&
-          res?.data is Map &&
-          res!.data!.containsKey("error")) {
-        showToastError("${res!.data["error"]}");
+    try {
+      if (res?.data != null && res?.data is Map) {
+        final convert = ResponseWrapper.fromMap(
+          rawResponse: res!,
+          purserFunction: (json) => null,
+        );
+        showToastError(convert.msg);
       } else {
-        showToastError(defaultMessage);
+        showToastError(msg ?? defaultMessage);
       }
+    } catch (e, s) {
+      log("#HandleError", error: e, stackTrace: s);
+      showToastError(defaultMessage);
     }
   }
 

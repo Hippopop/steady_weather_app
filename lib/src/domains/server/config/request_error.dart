@@ -2,26 +2,27 @@ import 'dart:convert';
 
 class RequestError {
   final int code;
-  final String msg;
+  final String message;
 
   const RequestError({
     required this.code,
-    required this.msg,
+    required this.message,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'code': code,
-      'msg': msg,
+      'message': message,
     };
   }
 
   factory RequestError.fromMap(Map<String, dynamic> map) {
     return RequestError(
       code: map['code'] as int,
-      msg: map['msg'] as String,
+      message: map['message'] as String,
     );
   }
 
-  String toJson() => json.encode(toMap());
+  @override
+  String toString() => json.encode(toMap());
 }

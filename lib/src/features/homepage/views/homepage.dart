@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:steady_weather_app/src/constants/design/constants.dart';
-import 'package:steady_weather_app/src/domain/server/weather_repository/weather_repository.dart';
+import 'package:steady_weather_app/src/domains/server/config/server_config.dart';
+import 'package:steady_weather_app/src/domains/server/weather_repository/weather_repository.dart';
+import 'package:steady_weather_app/src/utilities/scaffold_util.dart';
 
 import 'widgets/chance_of_rain.dart';
 import 'widgets/home_top.dart';
@@ -47,9 +49,19 @@ class Homepage extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
               final repo = ref.read(serverWeatherRepoProvider);
-              final res = await repo.getCurrentWeatherData(
-                  lat: 22.3657094, long: 91.808105);
-              log(res.toString());
+              try {
+                final res = await repo.getCurrentWeatherData(
+                    lat: 22.3657094, long: 91.808105);
+                log(res.toString());
+                if (res.isError) {
+                  showToastError(res.msg, "Thunder!!!");
+                }
+              } catch (e, s) {
+                if (e is RequestException) {
+                  e.handleError();
+                }
+                log("#Error", error: e, stackTrace: s);
+              }
             },
             child: const Icon(Icons.autorenew_rounded),
           ),
