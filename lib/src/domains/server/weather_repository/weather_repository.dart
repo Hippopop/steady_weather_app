@@ -20,11 +20,15 @@ final class ServerWeatherRepository {
   Future<ResponseWrapper<CurrentWeatherData>> getCurrentWeatherData({
     required double lat,
     required double long,
+    required int totalDay,
   }) async {
     try {
       final res = await requestHandler.get(
-        API.currentWeatherEndpoint,
-        queryParams: {'q': '$lat,$long'},
+        API.weatherForecastPath,
+        queryParams: {
+          'q': '$lat,$long',
+          'days': totalDay,
+        },
       );
       return ResponseWrapper.fromMap(
         rawResponse: res,

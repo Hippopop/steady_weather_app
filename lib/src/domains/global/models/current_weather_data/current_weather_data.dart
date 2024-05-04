@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'current_weather.dart';
+import '../forecast/forecast.dart';
 import '../location/location.dart';
 
 part 'current_weather_data.g.dart';
@@ -11,6 +12,7 @@ part 'current_weather_data.freezed.dart';
 class CurrentWeatherData with _$CurrentWeatherData {
   const factory CurrentWeatherData({
     @JsonKey(name: 'location') Location? location,
+    @JsonKey(name: 'forecast') Forecast? forecast,
     @JsonKey(name: 'current') CurrentWeather? current,
   }) = _CurrentWeatherData;
 

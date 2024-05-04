@@ -8,24 +8,28 @@ import 'package:steady_weather_app/src/domains/server/weather_repository/weather
 import 'package:steady_weather_app/src/services/connection/connection_state_provider.dart';
 import 'package:steady_weather_app/src/services/location/location_provider.dart';
 
-final currentWeatherStateProvider =
-    AsyncNotifierProvider<CurrentWeatherStateNotifier, CurrentWeatherData?>(
+final currentWeatherStateProvider = AsyncNotifierProviderFamily<
+    CurrentWeatherStateNotifier, CurrentWeatherData?, int>(
   CurrentWeatherStateNotifier.new,
 );
 
-class CurrentWeatherStateNotifier extends AsyncNotifier<CurrentWeatherData?> {
+class CurrentWeatherStateNotifier
+    extends FamilyAsyncNotifier<CurrentWeatherData?, int> {
   late final _serverRepo = ref.read(serverWeatherRepoProvider);
   late final _localStorageRepo = ref.read(localCurrentWeatherProvider);
 
   @override
-  FutureOr<CurrentWeatherData?> build() async {
+  FutureOr<CurrentWeatherData?> build(int arg) async {
     final locationStream = await ref.read(locationProvider.future);
     final connectionStatus = await ref.watch(isConnectedProvider.future);
     if (connectionStatus) {
       final res = await _serverRepo.getCurrentWeatherData(
-          lat: locationStream.lat!, long: locationStream.long!);
+        totalDay: arg,
+        lat: locationStream.lat!,
+        long: locationStream.long!,
+      );
       if (res.isSuccess) {
-        log(res.data.toString());
+        log("New current weather data has been fetched!");
         await _localStorageRepo.storeData(res.data!);
       }
     }

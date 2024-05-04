@@ -22,7 +22,6 @@ class CurrentWeatherDataStorage extends LocalRepo<String, CurrentWeatherData>
   CurrentWeatherData? get data {
     final storedString = myBox.get(key);
     if (storedString == null) return null;
-    log("Returning Data!");
     return CurrentWeatherData.fromJson(json.decode(storedString));
   }
 

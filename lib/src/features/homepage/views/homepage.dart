@@ -22,7 +22,7 @@ class Homepage extends StatelessWidget {
     final screen = MediaQuery.sizeOf(context);
     return Consumer(
       builder: (context, ref, child) {
-        final notifier = ref.watch(currentWeatherStateProvider);
+        final notifier = ref.watch(currentWeatherStateProvider(2));
         return notifier.when(
           data: (data) => Scaffold(
             backgroundColor: baseColor,
@@ -50,22 +50,7 @@ class Homepage extends StatelessWidget {
               ],
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: () async {
-                final repo = ref.read(serverWeatherRepoProvider);
-                try {
-                  final res = await repo.getCurrentWeatherData(
-                      lat: 22.3657094, long: 91.808105);
-                  log(res.toString());
-                  if (res.isError) {
-                    showToastError(res.msg, "Thunder!!!");
-                  }
-                } catch (e, s) {
-                  if (e is RequestException) {
-                    e.handleError();
-                  }
-                  log("#Error", error: e, stackTrace: s);
-                }
-              },
+              onPressed: () async {},
               child: const Icon(Icons.autorenew_rounded),
             ),
             body: Column(

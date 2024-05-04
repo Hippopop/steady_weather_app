@@ -12,6 +12,9 @@ _$CurrentWeatherDataImpl _$$CurrentWeatherDataImplFromJson(
       location: json['location'] == null
           ? null
           : Location.fromJson(json['location'] as Map<String, dynamic>),
+      forecast: json['forecast'] == null
+          ? null
+          : Forecast.fromJson(json['forecast'] as Map<String, dynamic>),
       current: json['current'] == null
           ? null
           : CurrentWeather.fromJson(json['current'] as Map<String, dynamic>),
@@ -21,5 +24,6 @@ Map<String, dynamic> _$$CurrentWeatherDataImplToJson(
         _$CurrentWeatherDataImpl instance) =>
     <String, dynamic>{
       'location': instance.location,
+      'forecast': instance.forecast,
       'current': instance.current,
     };

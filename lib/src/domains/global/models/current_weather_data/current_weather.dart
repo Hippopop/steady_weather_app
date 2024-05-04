@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../condition/condition.dart';
+
 part 'current_weather.g.dart';
 part 'current_weather.freezed.dart';
 
@@ -41,23 +43,4 @@ class CurrentWeather with _$CurrentWeather {
 
   factory CurrentWeather.fromJson(Map<String, Object?> json) =>
       _$CurrentWeatherFromJson(json);
-}
-
-@freezed
-class Condition with _$Condition {
-  const factory Condition({
-    @JsonKey(name: 'text') String? text,
-    @JsonKey(name: 'icon') String? icon,
-    @JsonKey(name: 'code') int? code,
-  }) = _Condition;
-
-  const Condition._();
-
-  String? get iconPath {
-    if (icon == null) return icon;
-    return "https:$icon";
-  }
-
-  factory Condition.fromJson(Map<String, Object?> json) =>
-      _$ConditionFromJson(json);
 }

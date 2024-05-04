@@ -15,7 +15,6 @@ class HomeTop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(currentWeather?.condition?.icon?.substring(2));
     return Row(
       children: [
         const Spacer(flex: 2),
