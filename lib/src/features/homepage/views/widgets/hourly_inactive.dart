@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:steady_weather_app/src/constants/design/constants.dart';
+import 'package:steady_weather_app/src/domains/global/models/forecast/hour_data.dart';
+import 'package:steady_weather_app/src/utilities/extensions/date_formats.dart';
 
 class HourlyPillInactive extends StatelessWidget {
   const HourlyPillInactive({
     super.key,
     required this.screen,
+    required this.data,
   });
+
+  final HourData data;
 
   final Size screen;
   @override
@@ -29,7 +34,7 @@ class HourlyPillInactive extends StatelessWidget {
               child: Center(
             child: FittedBox(
               child: Text(
-                "hour",
+                hFormat.format(data.pursedTime!),
                 style: subText,
               ),
             ),
@@ -42,12 +47,13 @@ class HourlyPillInactive extends StatelessWidget {
               shape: BoxShape.circle,
               color: overlayColor.withAlpha(30),
             ),
-            child: Icon(Icons.abc) /*!..color = Colors.white*/,
+            child: Image.network(
+                data.condition!.iconPath!) /*!..color = Colors.white*/,
           )),
           Expanded(
             child: Center(
-              child:
-                  Text.rich(TextSpan(text: "temp", style: subtitle, children: [
+              child: Text.rich(
+                  TextSpan(text: "${data.tempC}", style: subtitle, children: [
                 TextSpan(
                   text: '\u00B0C',
                   style: subText,

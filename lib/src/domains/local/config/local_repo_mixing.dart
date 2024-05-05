@@ -12,7 +12,8 @@ abstract class LocalRepo<T, Y> {
 
 mixin ExpirationKeyMixin<T> on LocalRepo<String, T> {
   static const expireDateKey = "#EXPIRE_DATE#";
-  static const expirePeriod = Duration(days: 3);
+  Duration get expirePeriod => const Duration(days: 3);
+
   updateExpireDate() =>
       myBox.put(expireDateKey, DateTime.now().toIso8601String());
 

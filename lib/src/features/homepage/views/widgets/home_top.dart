@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:steady_weather_app/src/constants/design/constants.dart';
-import 'package:steady_weather_app/src/constants/utilities/date_formats.dart';
+import 'package:steady_weather_app/src/utilities/extensions/date_formats.dart';
 import 'package:steady_weather_app/src/domains/global/models/current_weather_data/current_weather.dart';
 import 'package:steady_weather_app/src/domains/global/models/location/location.dart';
 
@@ -10,6 +10,7 @@ class HomeTop extends StatelessWidget {
     this.currentWeather,
     this.location,
   });
+
   final CurrentWeather? currentWeather;
   final Location? location;
 
@@ -25,9 +26,7 @@ class HomeTop extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                    Spacer(
-                      flex: 4,
-                    ),
+                    const Spacer(flex: 4),
                     Expanded(
                       flex: 30,
                       child: Row(
@@ -65,7 +64,9 @@ class HomeTop extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    "${eDayMonth.format(currentWeather?.lastUpdate ?? DateTime.now())}",
+                                    eDayMonth.format(
+                                        currentWeather?.lastUpdate ??
+                                            DateTime.now()),
                                     //"${instance.sortedDate}",
                                     style: subText,
                                   ),

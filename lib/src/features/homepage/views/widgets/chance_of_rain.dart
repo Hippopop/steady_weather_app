@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:steady_weather_app/src/constants/design/constants.dart';
+import 'package:steady_weather_app/src/domains/global/models/forecast/hour_data.dart';
+import 'package:steady_weather_app/src/utilities/extensions/date_formats.dart';
 
 class ChanceOfRain extends StatelessWidget {
   const ChanceOfRain({
     super.key,
+    required this.hourData,
   });
+
+  final List<HourData> hourData;
 
   @override
   Widget build(BuildContext context) {
@@ -76,238 +82,11 @@ class ChanceOfRain extends StatelessWidget {
                       flex: 8,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 9,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 10),
-                                      child:
-                                          LayoutBuilder(builder: (context, c) {
-                                        return SizedBox(
-                                          height: c.minHeight * 0.01,
-                                          child: Container(
-                                            width: 12,
-                                            decoration: BoxDecoration(
-                                              color: overlayColor.withAlpha(50),
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                25,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '4AM',
-                                      style: subText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 9,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 10),
-                                      child:
-                                          LayoutBuilder(builder: (context, c) {
-                                        return SizedBox(
-                                          height: c.minHeight * 0.01,
-                                          child: Container(
-                                            width: 12,
-                                            decoration: BoxDecoration(
-                                              color: overlayColor.withAlpha(50),
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                25,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '4AM',
-                                      style: subText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 9,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 10),
-                                      child:
-                                          LayoutBuilder(builder: (context, c) {
-                                        return SizedBox(
-                                          height: c.minHeight * 0.01,
-                                          child: Container(
-                                            width: 12,
-                                            decoration: BoxDecoration(
-                                              color: overlayColor.withAlpha(50),
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                25,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '4AM',
-                                      style: subText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 9,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 10),
-                                      child:
-                                          LayoutBuilder(builder: (context, c) {
-                                        return SizedBox(
-                                          height: c.minHeight * 0.01,
-                                          child: Container(
-                                            width: 12,
-                                            decoration: BoxDecoration(
-                                              color: Colors.amber,
-                                              // .withAlpha(50),
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                25,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '4AM',
-                                      style: subText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 9,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 10),
-                                      child:
-                                          LayoutBuilder(builder: (context, c) {
-                                        return SizedBox(
-                                          height: c.minHeight * 0.01,
-                                          child: Container(
-                                            width: 12,
-                                            decoration: BoxDecoration(
-                                              color: overlayColor.withAlpha(50),
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                25,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '4AM',
-                                      style: subText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 9,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 10),
-                                      child:
-                                          LayoutBuilder(builder: (context, c) {
-                                        return SizedBox(
-                                          height: c.minHeight * 0.01,
-                                          child: Container(
-                                            width: 12,
-                                            decoration: BoxDecoration(
-                                              color: overlayColor.withAlpha(50),
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                25,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '4AM',
-                                      style: subText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                        child: ListView.builder(
+                          itemCount: hourData.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) =>
+                              RainMeter(data: hourData[index]),
                         ),
                       ),
                     ),
@@ -317,6 +96,66 @@ class ChanceOfRain extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class RainMeter extends StatelessWidget {
+  const RainMeter({
+    super.key,
+    required this.data,
+  });
+  final HourData data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+      child: Column(
+        children: [
+          Expanded(
+            flex: 9,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: LayoutBuilder(builder: (context, c) {
+                return SizedBox(
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                        width: 12,
+                        decoration: BoxDecoration(
+                          color: overlayColor.withAlpha(50),
+                          borderRadius: BorderRadius.circular(
+                            25,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 12,
+                        height: c.maxHeight * (1 - (data.chanceOfRain! / 100)),
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(
+                            25,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              hFormat.format(data.pursedTime!),
+              style: subText,
+            ),
+          ),
+        ],
       ),
     );
   }

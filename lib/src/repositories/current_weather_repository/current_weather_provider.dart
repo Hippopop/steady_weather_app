@@ -2,24 +2,29 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:steady_weather_app/src/domains/global/models/current_weather_data/current_weather_data.dart';
-import 'package:steady_weather_app/src/domains/local/weather_repository/weather_repository.dart';
+import 'package:steady_weather_app/src/domains/local/current_location_storage/current_location_storage.dart';
+import 'package:steady_weather_app/src/domains/local/current_weather_storage/current_weather_storage.dart';
+import 'package:steady_weather_app/src/domains/local/day_forecast_storage/day_forecast_storage.dart';
 import 'package:steady_weather_app/src/domains/server/weather_repository/weather_repository.dart';
+import 'package:steady_weather_app/src/repositories/current_weather_repository/states/weather_forecast_state.dart';
 import 'package:steady_weather_app/src/services/connection/connection_state_provider.dart';
 import 'package:steady_weather_app/src/services/location/location_provider.dart';
+import 'package:steady_weather_app/src/utilities/scaffold_util.dart';
 
 final currentWeatherStateProvider = AsyncNotifierProviderFamily<
-    CurrentWeatherStateNotifier, CurrentWeatherData?, int>(
+    CurrentWeatherStateNotifier, WeatherForecastState?, int>(
   CurrentWeatherStateNotifier.new,
 );
 
 class CurrentWeatherStateNotifier
-    extends FamilyAsyncNotifier<CurrentWeatherData?, int> {
+    extends FamilyAsyncNotifier<WeatherForecastState?, int> {
   late final _serverRepo = ref.read(serverWeatherRepoProvider);
-  late final _localStorageRepo = ref.read(localCurrentWeatherProvider);
+  late final _localForecastRepo = ref.read(localDayForecastProvider);
+  late final _localWeatherRepo = ref.read(localCurrentWeatherProvider);
+  late final _localLocationRepo = ref.read(localCurrentLocationProvider);
 
   @override
-  FutureOr<CurrentWeatherData?> build(int arg) async {
+  FutureOr<WeatherForecastState?> build(int arg) async {
     final locationStream = await ref.read(locationProvider.future);
     final connectionStatus = await ref.watch(isConnectedProvider.future);
     if (connectionStatus) {
@@ -28,11 +33,23 @@ class CurrentWeatherStateNotifier
         lat: locationStream.lat!,
         long: locationStream.long!,
       );
+
       if (res.isSuccess) {
         log("New current weather data has been fetched!");
-        await _localStorageRepo.storeData(res.data!);
+        await _localWeatherRepo.storeData(res.data!.current!);
+        await _localLocationRepo.storeData(res.data!.location!);
+        await _localForecastRepo.storeData(
+          res.data!.forecast!.dailyForecastList!,
+        );
+      } else {
+        showToastError(res.msg);
       }
     }
-    return _localStorageRepo.data;
+
+    return WeatherForecastState(
+      currentLocation: _localLocationRepo.data,
+      weatherData: _localWeatherRepo.data,
+      availableForecastList: await _localForecastRepo.availableForecastList(),
+    );
   }
 }

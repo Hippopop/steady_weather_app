@@ -577,7 +577,7 @@ class __$$HourDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$HourDataImpl with DiagnosticableTreeMixin implements _HourData {
+class _$HourDataImpl extends _HourData with DiagnosticableTreeMixin {
   const _$HourDataImpl(
       {@JsonKey(name: 'time_epoch') this.timeEpoch,
       @JsonKey(name: 'time') this.time,
@@ -612,7 +612,8 @@ class _$HourDataImpl with DiagnosticableTreeMixin implements _HourData {
       @JsonKey(name: 'vis_miles') this.visMiles,
       @JsonKey(name: 'gust_mph') this.gustMph,
       @JsonKey(name: 'gust_kph') this.gustKph,
-      @JsonKey(name: 'uv') this.uv});
+      @JsonKey(name: 'uv') this.uv})
+      : super._();
 
   factory _$HourDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$HourDataImplFromJson(json);
@@ -882,7 +883,7 @@ class _$HourDataImpl with DiagnosticableTreeMixin implements _HourData {
   }
 }
 
-abstract class _HourData implements HourData {
+abstract class _HourData extends HourData {
   const factory _HourData(
       {@JsonKey(name: 'time_epoch') final int? timeEpoch,
       @JsonKey(name: 'time') final String? time,
@@ -918,6 +919,7 @@ abstract class _HourData implements HourData {
       @JsonKey(name: 'gust_mph') final double? gustMph,
       @JsonKey(name: 'gust_kph') final double? gustKph,
       @JsonKey(name: 'uv') final int? uv}) = _$HourDataImpl;
+  const _HourData._() : super._();
 
   factory _HourData.fromJson(Map<String, dynamic> json) =
       _$HourDataImpl.fromJson;

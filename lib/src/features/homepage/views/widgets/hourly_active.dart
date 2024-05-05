@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:steady_weather_app/src/constants/design/constants.dart';
+import 'package:steady_weather_app/src/domains/global/models/forecast/hour_data.dart';
+import 'package:steady_weather_app/src/utilities/extensions/date_formats.dart';
 
 class HourlyPillActive extends StatefulWidget {
   const HourlyPillActive({
     super.key,
     required this.screen,
+    required this.data,
   });
   final Size screen;
+  final HourData data;
 
   @override
   State<HourlyPillActive> createState() => _HourlyPillActiveState();
@@ -33,7 +37,7 @@ class _HourlyPillActiveState extends State<HourlyPillActive> {
           Expanded(
               child: Center(
             child: Text(
-              "hour",
+              hFormat.format(widget.data.pursedTime!),
               style: subText.copyWith(
                 color: baseColor,
               ),
@@ -47,14 +51,14 @@ class _HourlyPillActiveState extends State<HourlyPillActive> {
                 shape: BoxShape.circle,
                 color: overlayColor,
               ),
-              child: Icon(Icons.abc),
+              child: Image.network(widget.data.condition!.iconPath!),
             ),
           ),
           Expanded(
             child: Center(
               child: Text.rich(
                 TextSpan(
-                  text: "temp",
+                  text: "${widget.data.tempC}",
                   style: subtitle.copyWith(color: baseColor),
                   children: [
                     TextSpan(

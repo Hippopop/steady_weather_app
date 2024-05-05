@@ -3,10 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:steady_weather_app/src/constants/design/constants.dart';
-import 'package:steady_weather_app/src/domains/server/config/server_config.dart';
-import 'package:steady_weather_app/src/domains/server/weather_repository/weather_repository.dart';
-import 'package:steady_weather_app/src/repositories/current_weather_repository/current_weather_provider.dart';
-import 'package:steady_weather_app/src/utilities/scaffold_util.dart';
+import 'package:steady_weather_app/src/features/homepage/controllers/homepage_controller.dart';
 
 import 'widgets/chance_of_rain.dart';
 import 'widgets/home_top.dart';
@@ -22,7 +19,7 @@ class Homepage extends StatelessWidget {
     final screen = MediaQuery.sizeOf(context);
     return Consumer(
       builder: (context, ref, child) {
-        final notifier = ref.watch(currentWeatherStateProvider(2));
+        final notifier = ref.watch(homepageControllerProvider);
         return notifier.when(
           data: (data) => Scaffold(
             backgroundColor: baseColor,
@@ -58,8 +55,8 @@ class Homepage extends StatelessWidget {
                 Expanded(
                   flex: 4,
                   child: HomeTop(
-                    location: data?.location,
-                    currentWeather: data?.current,
+                    location: data.currentLocation,
+                    currentWeather: data.weatherData,
                   ),
                 ),
 
@@ -93,14 +90,15 @@ class Homepage extends StatelessWidget {
                                             style: subtitle,
                                           ),
                                         ),
-                                        Container(
-                                          height: 4,
-                                          width: 4,
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: textColor,
-                                          ),
-                                        )
+                                        if (data.isToday)
+                                          Container(
+                                            height: 4,
+                                            width: 4,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: textColor,
+                                            ),
+                                          )
                                       ],
                                     ),
                                   ),
@@ -108,24 +106,33 @@ class Homepage extends StatelessWidget {
                                 Expanded(
                                   flex: 3,
                                   child: Center(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        FittedBox(
-                                          child: Text(
-                                            'Tomorrow',
-                                            style: subtitle,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        final controller = ref.read(
+                                            homepageControllerProvider
+                                                .notifier);
+                                        controller.switchBetweenDays();
+                                      },
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          FittedBox(
+                                            child: Text(
+                                              'Tomorrow',
+                                              style: subtitle,
+                                            ),
                                           ),
-                                        ),
-                                        // Container(
-                                        //   height: 4,
-                                        //   width: 4,
-                                        //   decoration: BoxDecoration(
-                                        //     shape: BoxShape.circle,
-                                        //     color: textColor,
-                                        //   ),
-                                        // )
-                                      ],
+                                          if (!data.isToday)
+                                            Container(
+                                              height: 4,
+                                              width: 4,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: textColor,
+                                              ),
+                                            )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -167,21 +174,23 @@ class Homepage extends StatelessWidget {
                         flex: 40,
                         child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: ListView(
+                            child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              children: List.generate(10, (index) => index)
-                                  .map((hour) {
-                                hour++;
+                              itemCount: data.tomorrowForecast!.hour!.length,
+                              itemBuilder: (_, index) {
+                                final hour = index + 1;
                                 if (hour.isEven) {
                                   return HourlyPillActive(
                                     screen: screen,
+                                    data: data.tomorrowForecast!.hour![index],
                                   );
                                 } else {
                                   return HourlyPillInactive(
                                     screen: screen,
+                                    data: data.tomorrowForecast!.hour![index],
                                   );
                                 }
-                              }).toList(),
+                              },
                             )),
                       ),
                       const Spacer(
@@ -189,7 +198,9 @@ class Homepage extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 43,
-                        child: ChanceOfRain(),
+                        child: ChanceOfRain(
+                          hourData: data.tomorrowForecast!.hour!,
+                        ),
                       ),
                     ],
                   ),
@@ -198,6 +209,7 @@ class Homepage extends StatelessWidget {
             ),
           ),
           error: (error, stackTrace) {
+            log("#HomepageError", error: error, stackTrace: stackTrace);
             return ErrorWidget(error);
           },
           loading: () => const Center(
@@ -208,3 +220,5 @@ class Homepage extends StatelessWidget {
     );
   }
 }
+
+RestorationMixin? x;

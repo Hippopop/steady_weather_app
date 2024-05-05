@@ -45,6 +45,13 @@ class HourData with _$HourData {
     @JsonKey(name: 'uv') int? uv,
   }) = _HourData;
 
+  const HourData._();
+
+  DateTime? get pursedTime {
+    if (timeEpoch == null) return null;
+    return DateTime.fromMillisecondsSinceEpoch(timeEpoch! * 1000);
+  }
+
   factory HourData.fromJson(Map<String, Object?> json) =>
       _$HourDataFromJson(json);
 }

@@ -5,17 +5,17 @@ import 'current_weather.dart';
 import '../forecast/forecast.dart';
 import '../location/location.dart';
 
-part 'current_weather_data.g.dart';
-part 'current_weather_data.freezed.dart';
+part 'weather_forecast_data.g.dart';
+part 'weather_forecast_data.freezed.dart';
 
 @freezed
-class CurrentWeatherData with _$CurrentWeatherData {
-  const factory CurrentWeatherData({
+class WeatherForecastData with _$WeatherForecastData {
+  const factory WeatherForecastData({
     @JsonKey(name: 'location') Location? location,
     @JsonKey(name: 'forecast') Forecast? forecast,
     @JsonKey(name: 'current') CurrentWeather? current,
-  }) = _CurrentWeatherData;
+  }) = _WeatherForecastData;
 
-  factory CurrentWeatherData.fromJson(Map<String, Object?> json) =>
-      _$CurrentWeatherDataFromJson(json);
+  factory WeatherForecastData.fromJson(Map<String, Object?> json) =>
+      _$WeatherForecastDataFromJson(json);
 }

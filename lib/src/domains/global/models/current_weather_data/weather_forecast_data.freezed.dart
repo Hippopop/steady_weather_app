@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'current_weather_data.dart';
+part of 'weather_forecast_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-CurrentWeatherData _$CurrentWeatherDataFromJson(Map<String, dynamic> json) {
-  return _CurrentWeatherData.fromJson(json);
+WeatherForecastData _$WeatherForecastDataFromJson(Map<String, dynamic> json) {
+  return _WeatherForecastData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$CurrentWeatherData {
+mixin _$WeatherForecastData {
   @JsonKey(name: 'location')
   Location? get location => throw _privateConstructorUsedError;
   @JsonKey(name: 'forecast')
@@ -29,15 +29,15 @@ mixin _$CurrentWeatherData {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CurrentWeatherDataCopyWith<CurrentWeatherData> get copyWith =>
+  $WeatherForecastDataCopyWith<WeatherForecastData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CurrentWeatherDataCopyWith<$Res> {
-  factory $CurrentWeatherDataCopyWith(
-          CurrentWeatherData value, $Res Function(CurrentWeatherData) then) =
-      _$CurrentWeatherDataCopyWithImpl<$Res, CurrentWeatherData>;
+abstract class $WeatherForecastDataCopyWith<$Res> {
+  factory $WeatherForecastDataCopyWith(
+          WeatherForecastData value, $Res Function(WeatherForecastData) then) =
+      _$WeatherForecastDataCopyWithImpl<$Res, WeatherForecastData>;
   @useResult
   $Res call(
       {@JsonKey(name: 'location') Location? location,
@@ -50,9 +50,9 @@ abstract class $CurrentWeatherDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CurrentWeatherDataCopyWithImpl<$Res, $Val extends CurrentWeatherData>
-    implements $CurrentWeatherDataCopyWith<$Res> {
-  _$CurrentWeatherDataCopyWithImpl(this._value, this._then);
+class _$WeatherForecastDataCopyWithImpl<$Res, $Val extends WeatherForecastData>
+    implements $WeatherForecastDataCopyWith<$Res> {
+  _$WeatherForecastDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -120,11 +120,11 @@ class _$CurrentWeatherDataCopyWithImpl<$Res, $Val extends CurrentWeatherData>
 }
 
 /// @nodoc
-abstract class _$$CurrentWeatherDataImplCopyWith<$Res>
-    implements $CurrentWeatherDataCopyWith<$Res> {
-  factory _$$CurrentWeatherDataImplCopyWith(_$CurrentWeatherDataImpl value,
-          $Res Function(_$CurrentWeatherDataImpl) then) =
-      __$$CurrentWeatherDataImplCopyWithImpl<$Res>;
+abstract class _$$WeatherForecastDataImplCopyWith<$Res>
+    implements $WeatherForecastDataCopyWith<$Res> {
+  factory _$$WeatherForecastDataImplCopyWith(_$WeatherForecastDataImpl value,
+          $Res Function(_$WeatherForecastDataImpl) then) =
+      __$$WeatherForecastDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -141,11 +141,11 @@ abstract class _$$CurrentWeatherDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CurrentWeatherDataImplCopyWithImpl<$Res>
-    extends _$CurrentWeatherDataCopyWithImpl<$Res, _$CurrentWeatherDataImpl>
-    implements _$$CurrentWeatherDataImplCopyWith<$Res> {
-  __$$CurrentWeatherDataImplCopyWithImpl(_$CurrentWeatherDataImpl _value,
-      $Res Function(_$CurrentWeatherDataImpl) _then)
+class __$$WeatherForecastDataImplCopyWithImpl<$Res>
+    extends _$WeatherForecastDataCopyWithImpl<$Res, _$WeatherForecastDataImpl>
+    implements _$$WeatherForecastDataImplCopyWith<$Res> {
+  __$$WeatherForecastDataImplCopyWithImpl(_$WeatherForecastDataImpl _value,
+      $Res Function(_$WeatherForecastDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -155,7 +155,7 @@ class __$$CurrentWeatherDataImplCopyWithImpl<$Res>
     Object? forecast = freezed,
     Object? current = freezed,
   }) {
-    return _then(_$CurrentWeatherDataImpl(
+    return _then(_$WeatherForecastDataImpl(
       location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -174,16 +174,16 @@ class __$$CurrentWeatherDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CurrentWeatherDataImpl
+class _$WeatherForecastDataImpl
     with DiagnosticableTreeMixin
-    implements _CurrentWeatherData {
-  const _$CurrentWeatherDataImpl(
+    implements _WeatherForecastData {
+  const _$WeatherForecastDataImpl(
       {@JsonKey(name: 'location') this.location,
       @JsonKey(name: 'forecast') this.forecast,
       @JsonKey(name: 'current') this.current});
 
-  factory _$CurrentWeatherDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CurrentWeatherDataImplFromJson(json);
+  factory _$WeatherForecastDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WeatherForecastDataImplFromJson(json);
 
   @override
   @JsonKey(name: 'location')
@@ -197,14 +197,14 @@ class _$CurrentWeatherDataImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CurrentWeatherData(location: $location, forecast: $forecast, current: $current)';
+    return 'WeatherForecastData(location: $location, forecast: $forecast, current: $current)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'CurrentWeatherData'))
+      ..add(DiagnosticsProperty('type', 'WeatherForecastData'))
       ..add(DiagnosticsProperty('location', location))
       ..add(DiagnosticsProperty('forecast', forecast))
       ..add(DiagnosticsProperty('current', current));
@@ -214,7 +214,7 @@ class _$CurrentWeatherDataImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CurrentWeatherDataImpl &&
+            other is _$WeatherForecastDataImpl &&
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.forecast, forecast) ||
@@ -229,27 +229,27 @@ class _$CurrentWeatherDataImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CurrentWeatherDataImplCopyWith<_$CurrentWeatherDataImpl> get copyWith =>
-      __$$CurrentWeatherDataImplCopyWithImpl<_$CurrentWeatherDataImpl>(
+  _$$WeatherForecastDataImplCopyWith<_$WeatherForecastDataImpl> get copyWith =>
+      __$$WeatherForecastDataImplCopyWithImpl<_$WeatherForecastDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CurrentWeatherDataImplToJson(
+    return _$$WeatherForecastDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _CurrentWeatherData implements CurrentWeatherData {
-  const factory _CurrentWeatherData(
+abstract class _WeatherForecastData implements WeatherForecastData {
+  const factory _WeatherForecastData(
           {@JsonKey(name: 'location') final Location? location,
           @JsonKey(name: 'forecast') final Forecast? forecast,
           @JsonKey(name: 'current') final CurrentWeather? current}) =
-      _$CurrentWeatherDataImpl;
+      _$WeatherForecastDataImpl;
 
-  factory _CurrentWeatherData.fromJson(Map<String, dynamic> json) =
-      _$CurrentWeatherDataImpl.fromJson;
+  factory _WeatherForecastData.fromJson(Map<String, dynamic> json) =
+      _$WeatherForecastDataImpl.fromJson;
 
   @override
   @JsonKey(name: 'location')
@@ -262,6 +262,6 @@ abstract class _CurrentWeatherData implements CurrentWeatherData {
   CurrentWeather? get current;
   @override
   @JsonKey(ignore: true)
-  _$$CurrentWeatherDataImplCopyWith<_$CurrentWeatherDataImpl> get copyWith =>
+  _$$WeatherForecastDataImplCopyWith<_$WeatherForecastDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

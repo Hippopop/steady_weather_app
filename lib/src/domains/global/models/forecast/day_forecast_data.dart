@@ -20,7 +20,7 @@ class DayForecastData with _$DayForecastData {
 
   const DayForecastData._();
 
-  DateTime? get lastUpdate {
+  DateTime? get forecastDate {
     if (dateEpoch == null) return null;
     return DateTime.fromMillisecondsSinceEpoch(dateEpoch! * 1000);
   }

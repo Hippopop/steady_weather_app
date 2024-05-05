@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:steady_weather_app/src/domains/server/config/api/api.dart';
 import 'package:steady_weather_app/src/domains/server/config/response_wrapper.dart';
-import 'package:steady_weather_app/src/domains/global/models/current_weather_data/current_weather_data.dart';
+import 'package:steady_weather_app/src/domains/global/models/current_weather_data/weather_forecast_data.dart';
 
 import '../config/server_config.dart';
 
@@ -17,7 +17,7 @@ final class ServerWeatherRepository {
   final RequestHandler requestHandler;
   const ServerWeatherRepository({required this.requestHandler});
 
-  Future<ResponseWrapper<CurrentWeatherData>> getCurrentWeatherData({
+  Future<ResponseWrapper<WeatherForecastData>> getCurrentWeatherData({
     required double lat,
     required double long,
     required int totalDay,
@@ -32,7 +32,7 @@ final class ServerWeatherRepository {
       );
       return ResponseWrapper.fromMap(
         rawResponse: res,
-        purserFunction: (json) => CurrentWeatherData.fromJson(json),
+        purserFunction: (json) => WeatherForecastData.fromJson(json),
       );
     } catch (e, s) {
       log("#GetCurrentWeatherError", error: e, stackTrace: s);

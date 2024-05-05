@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'current_weather_data.dart';
+part of 'weather_forecast_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CurrentWeatherDataImpl _$$CurrentWeatherDataImplFromJson(
+_$WeatherForecastDataImpl _$$WeatherForecastDataImplFromJson(
         Map<String, dynamic> json) =>
-    _$CurrentWeatherDataImpl(
+    _$WeatherForecastDataImpl(
       location: json['location'] == null
           ? null
           : Location.fromJson(json['location'] as Map<String, dynamic>),
@@ -20,8 +20,8 @@ _$CurrentWeatherDataImpl _$$CurrentWeatherDataImplFromJson(
           : CurrentWeather.fromJson(json['current'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$CurrentWeatherDataImplToJson(
-        _$CurrentWeatherDataImpl instance) =>
+Map<String, dynamic> _$$WeatherForecastDataImplToJson(
+        _$WeatherForecastDataImpl instance) =>
     <String, dynamic>{
       'location': instance.location,
       'forecast': instance.forecast,
