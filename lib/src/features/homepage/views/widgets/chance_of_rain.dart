@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:steady_weather_app/src/constants/design/constants.dart';
 import 'package:steady_weather_app/src/domains/global/models/forecast/hour_data.dart';
 import 'package:steady_weather_app/src/utilities/extensions/date_formats.dart';

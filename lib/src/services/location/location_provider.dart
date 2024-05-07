@@ -7,6 +7,7 @@ final locationProvider = StreamProvider<({double? lat, double? long})>(
     final isSettingsOk = await ref.watch(locationSettingsProvider.future);
     if (isSettingsOk) {
       final location = Location();
+
       yield* location.onLocationChanged.map(
         (event) => (lat: event.latitude, long: event.longitude),
       );

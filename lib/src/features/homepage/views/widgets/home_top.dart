@@ -65,8 +65,9 @@ class HomeTop extends StatelessWidget {
                                   ),
                                   Text(
                                     eDayMonth.format(
-                                        currentWeather?.lastUpdate ??
-                                            DateTime.now()),
+                                      currentWeather?.lastUpdate ??
+                                          DateTime.now(),
+                                    ),
                                     //"${instance.sortedDate}",
                                     style: subText,
                                   ),

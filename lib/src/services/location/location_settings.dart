@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:location/location.dart';
 
 final locationSettingsProvider = FutureProvider<bool>((ref) async {
   Location location = Location();
-  print("Getting Called!");
+  log("Getting Location Settings Called!");
   bool serviceEnabled = await location.serviceEnabled();
   if (!serviceEnabled) {
     serviceEnabled = await location.requestService();

@@ -41,7 +41,7 @@ class HourlyPillInactive extends StatelessWidget {
           )),
           Expanded(
               child: Container(
-            padding: const EdgeInsets.all(1),
+            padding: const EdgeInsets.all(5),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.circle,

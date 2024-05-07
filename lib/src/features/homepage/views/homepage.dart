@@ -46,10 +46,6 @@ class Homepage extends StatelessWidget {
                 )
               ],
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () async {},
-              child: const Icon(Icons.autorenew_rounded),
-            ),
             body: Column(
               children: [
                 Expanded(

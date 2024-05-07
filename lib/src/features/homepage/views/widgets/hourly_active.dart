@@ -3,7 +3,7 @@ import 'package:steady_weather_app/src/constants/design/constants.dart';
 import 'package:steady_weather_app/src/domains/global/models/forecast/hour_data.dart';
 import 'package:steady_weather_app/src/utilities/extensions/date_formats.dart';
 
-class HourlyPillActive extends StatefulWidget {
+class HourlyPillActive extends StatelessWidget {
   const HourlyPillActive({
     super.key,
     required this.screen,
@@ -13,17 +13,11 @@ class HourlyPillActive extends StatefulWidget {
   final HourData data;
 
   @override
-  State<HourlyPillActive> createState() => _HourlyPillActiveState();
-}
-
-class _HourlyPillActiveState extends State<HourlyPillActive> {
-  @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(seconds: 1),
-      width: widget.screen.width / 5,
+    return Container(
+      width: screen.width / 5,
       height: double.infinity,
-      margin: EdgeInsets.only(bottom: 20, left: 5, right: 5),
+      margin: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
       padding: const EdgeInsets.symmetric(vertical: 3),
       decoration: BoxDecoration(
         color: textColor,
@@ -37,7 +31,7 @@ class _HourlyPillActiveState extends State<HourlyPillActive> {
           Expanded(
               child: Center(
             child: Text(
-              hFormat.format(widget.data.pursedTime!),
+              hFormat.format(data.pursedTime!),
               style: subText.copyWith(
                 color: baseColor,
               ),
@@ -45,20 +39,20 @@ class _HourlyPillActiveState extends State<HourlyPillActive> {
           )),
           Expanded(
             child: Container(
-              padding: const EdgeInsets.all(1),
+              padding: const EdgeInsets.all(5),
               alignment: Alignment.center,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: overlayColor,
               ),
-              child: Image.network(widget.data.condition!.iconPath!),
+              child: Image.network(data.condition!.iconPath!),
             ),
           ),
           Expanded(
             child: Center(
               child: Text.rich(
                 TextSpan(
-                  text: "${widget.data.tempC}",
+                  text: "${data.tempC}",
                   style: subtitle.copyWith(color: baseColor),
                   children: [
                     TextSpan(
