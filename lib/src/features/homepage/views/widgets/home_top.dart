@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:steady_weather_app/src/constants/design/constants.dart';
+import 'package:steady_weather_app/src/utilities/extensions/date_formats.dart';
+import 'package:steady_weather_app/src/domains/global/models/current_weather_data/current_weather.dart';
+import 'package:steady_weather_app/src/domains/global/models/location/location.dart';
 
 class HomeTop extends StatelessWidget {
   const HomeTop({
     super.key,
+    this.currentWeather,
+    this.location,
   });
+
+  final CurrentWeather? currentWeather;
+  final Location? location;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -17,9 +26,7 @@ class HomeTop extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                    Spacer(
-                      flex: 4,
-                    ),
+                    const Spacer(flex: 4),
                     Expanded(
                       flex: 30,
                       child: Row(
@@ -28,14 +35,18 @@ class HomeTop extends StatelessWidget {
                           Expanded(
                             flex: 4,
                             child: Container(
-                              padding:
-                                  const EdgeInsets.only(top: 10, right: 12),
+                              padding: const EdgeInsets.only(right: 12),
                               alignment: Alignment.topRight,
                               //color: Colors.grey,
-                              child: Icon(
-                                Icons.abc,
-                                color: Colors.blue,
-                                size: 36,
+                              child: SizedBox.square(
+                                dimension: 64,
+                                child: FittedBox(
+                                  alignment: Alignment.center,
+                                  child: Image.network(
+                                    currentWeather?.condition?.iconPath ?? "",
+                                    // color: Colors.black,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -53,7 +64,10 @@ class HomeTop extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    "text",
+                                    eDayMonth.format(
+                                      currentWeather?.lastUpdate ??
+                                          DateTime.now(),
+                                    ),
                                     //"${instance.sortedDate}",
                                     style: subText,
                                   ),
@@ -77,7 +91,7 @@ class HomeTop extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "text",
+                                "${currentWeather?.tempC}",
                                 style: focusText.copyWith(
                                   fontSize: 100,
                                   fontWeight: FontWeight.w500,
@@ -98,7 +112,7 @@ class HomeTop extends StatelessWidget {
                     Expanded(
                       flex: 14,
                       child: Text(
-                        "text",
+                        "${location?.name}, ${location?.country}",
                         style: subText,
                       ),
                     ),
@@ -108,18 +122,19 @@ class HomeTop extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            'Feels like X\u00B0',
+                            'Feels ${currentWeather?.feelslikeC}\u00B0',
                             style: subText,
                           ),
                           const Text(
                             '.',
                             style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w800,
-                                color: textColor),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                              color: textColor,
+                            ),
                           ),
                           Text(
-                            'Sunset X',
+                            'Humidity ${currentWeather?.humidity}',
                             style: subText,
                           ),
                         ],
